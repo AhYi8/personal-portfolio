@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">个人作品集</title>
+    <meta name="description" content="" id="page-description">
+    <meta name="keywords" content="" id="page-keywords">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Markdown Parser CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="header-glass sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="header-content flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="logo text-2xl" id="site-logo">个人作品集</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-2">
+                    <div id="desktop-nav" class="flex space-x-2">
+                        <!-- 导航菜单将通过 JavaScript 动态生成 -->
+                    </div>
+                </nav>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="nav-item text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" id="mobile-menu-btn">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3" id="mobile-nav">
+                    <!-- 移动端菜单项将通过 JavaScript 动态生成 -->
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Container 内容区域 -->
+    <main class="flex-1">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div id="content-container" class="bg-white rounded-lg shadow-sm p-6">
+                <!-- 内容将通过 JavaScript 动态加载 -->
+                <div class="text-center py-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">欢迎访问我的个人作品集</h2>
+                    <p class="text-gray-600">请选择导航菜单查看相关内容</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer-glass border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="footer-content flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <!-- 左侧图片区域 -->
+                <div class="flex space-x-6">
+                    <div id="footer-images" class="flex space-x-6">
+                        <!-- 图片将通过 JavaScript 动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 中间联系信息 -->
+                <div class="text-center md:text-left flex-1 md:mx-8">
+                    <div id="footer-contact" class="space-y-3">
+                        <!-- 联系信息将通过 JavaScript 动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 右侧二维码 -->
+                <div class="flex space-x-4" id="footer-qrcode-container" style="display: none;">
+                    <div id="footer-qrcodes" class="flex space-x-4">
+                        <!-- 二维码将通过 JavaScript 动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript 文件 -->
+    <script src="config/config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">项目展示</h1>
+        <p class="text-xl text-gray-600">
+            以下是我参与开发的一些代表性项目，
+            涵盖了前端、后端、移动端等多个技术领域。
+        </p>
+    </div>
+    
+    <!-- 项目筛选 -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <button class="filter-btn active" data-filter="all">
+            <i data-lucide="grid-3x3" class="w-4 h-4 mr-2"></i>
+            全部项目
+        </button>
+        <button class="filter-btn" data-filter="web">
+            <i data-lucide="monitor" class="w-4 h-4 mr-2"></i>
+            Web 应用
+        </button>
+        <button class="filter-btn" data-filter="mobile">
+            <i data-lucide="smartphone" class="w-4 h-4 mr-2"></i>
+            移动应用
+        </button>
+        <button class="filter-btn" data-filter="backend">
+            <i data-lucide="server" class="w-4 h-4 mr-2"></i>
+            后端服务
+        </button>
+    </div>
+    
+    <!-- 项目网格 -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+        <!-- 项目 1: 电商平台 -->
+        <div class="project-card" data-category="web">
+            <div class="project-image">
+                <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="shopping-cart" class="w-16 h-16 text-white"></i>
+                </div>
+                <div class="project-overlay">
+                    <div class="flex space-x-4">
+                        <button class="overlay-btn" onclick="openProjectDemo('ecommerce')">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </button>
+                        <button class="overlay-btn" onclick="openProjectCode('ecommerce')">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xl font-semibold text-gray-900">智能电商平台</h3>
+                    <span class="badge">Web</span>
+                </div>
+                
+                <p class="text-gray-600 mb-4">
+                    基于 React 和 Node.js 构建的现代化电商平台，
+                    支持商品管理、订单处理、支付集成等完整功能。
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Stripe</span>
+                </div>
+                
+                <div class="flex items-center text-sm text-gray-500">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-1"></i>
+                    <span>2023年10月</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 项目 2: 任务管理应用 -->
+        <div class="project-card" data-category="mobile">
+            <div class="project-image">
+                <div class="w-full h-48 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="check-square" class="w-16 h-16 text-white"></i>
+                </div>
+                <div class="project-overlay">
+                    <div class="flex space-x-4">
+                        <button class="overlay-btn" onclick="openProjectDemo('taskapp')">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </button>
+                        <button class="overlay-btn" onclick="openProjectCode('taskapp')">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xl font-semibold text-gray-900">智能任务管理</h3>
+                    <span class="badge-success">Mobile</span>
+                </div>
+                
+                <p class="text-gray-600 mb-4">
+                    跨平台移动应用，支持任务创建、团队协作、
+                    进度跟踪和智能提醒等功能。
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-tag">React Native</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">Redux</span>
+                    <span class="tech-tag">Push Notifications</span>
+                </div>
+                
+                <div class="flex items-center text-sm text-gray-500">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-1"></i>
+                    <span>2023年8月</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 项目 3: API 网关 -->
+        <div class="project-card" data-category="backend">
+            <div class="project-image">
+                <div class="w-full h-48 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="layers" class="w-16 h-16 text-white"></i>
+                </div>
+                <div class="project-overlay">
+                    <div class="flex space-x-4">
+                        <button class="overlay-btn" onclick="openProjectDemo('apigateway')">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </button>
+                        <button class="overlay-btn" onclick="openProjectCode('apigateway')">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xl font-semibold text-gray-900">微服务 API 网关</h3>
+                    <span class="badge-warning">Backend</span>
+                </div>
+                
+                <p class="text-gray-600 mb-4">
+                    高性能 API 网关服务，支持路由转发、
+                    负载均衡、认证授权和限流等功能。
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Express</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+                
+                <div class="flex items-center text-sm text-gray-500">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-1"></i>
+                    <span>2023年6月</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 项目 4: 数据可视化平台 -->
+        <div class="project-card" data-category="web">
+            <div class="project-image">
+                <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="bar-chart-3" class="w-16 h-16 text-white"></i>
+                </div>
+                <div class="project-overlay">
+                    <div class="flex space-x-4">
+                        <button class="overlay-btn" onclick="openProjectDemo('dashboard')">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </button>
+                        <button class="overlay-btn" onclick="openProjectCode('dashboard')">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xl font-semibold text-gray-900">数据可视化平台</h3>
+                    <span class="badge">Web</span>
+                </div>
+                
+                <p class="text-gray-600 mb-4">
+                    企业级数据可视化平台，支持多种图表类型、
+                    实时数据更新和自定义仪表板。
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">WebSocket</span>
+                    <span class="tech-tag">Python</span>
+                </div>
+                
+                <div class="flex items-center text-sm text-gray-500">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-1"></i>
+                    <span>2023年4月</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 项目 5: 社交媒体应用 -->
+        <div class="project-card" data-category="mobile">
+            <div class="project-image">
+                <div class="w-full h-48 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="users" class="w-16 h-16 text-white"></i>
+                </div>
+                <div class="project-overlay">
+                    <div class="flex space-x-4">
+                        <button class="overlay-btn" onclick="openProjectDemo('social')">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </button>
+                        <button class="overlay-btn" onclick="openProjectCode('social')">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xl font-semibold text-gray-900">社交媒体应用</h3>
+                    <span class="badge-success">Mobile</span>
+                </div>
+                
+                <p class="text-gray-600 mb-4">
+                    功能完整的社交媒体应用，支持动态发布、
+                    好友互动、实时聊天和内容推荐。
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-tag">Flutter</span>
+                    <span class="tech-tag">Dart</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">Cloud Functions</span>
+                </div>
+                
+                <div class="flex items-center text-sm text-gray-500">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-1"></i>
+                    <span>2023年2月</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 项目 6: 区块链钱包 -->
+        <div class="project-card" data-category="web">
+            <div class="project-image">
+                <div class="w-full h-48 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="wallet" class="w-16 h-16 text-white"></i>
+                </div>
+                <div class="project-overlay">
+                    <div class="flex space-x-4">
+                        <button class="overlay-btn" onclick="openProjectDemo('wallet')">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </button>
+                        <button class="overlay-btn" onclick="openProjectCode('wallet')">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xl font-semibold text-gray-900">区块链数字钱包</h3>
+                    <span class="badge">Web</span>
+                </div>
+                
+                <p class="text-gray-600 mb-4">
+                    安全的数字货币钱包应用，支持多种加密货币、
+                    交易记录和 DeFi 协议集成。
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Web3.js</span>
+                    <span class="tech-tag">Ethereum</span>
+                    <span class="tech-tag">Solidity</span>
+                </div>
+                
+                <div class="flex items-center text-sm text-gray-500">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-1"></i>
+                    <span>2022年12月</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 更多项目 -->
+    <div class="text-center mt-16">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-6">更多项目</h2>
+        <p class="text-gray-600 mb-8 max-w-3xl mx-auto">
+            除了上述展示的项目外，我还参与了许多其他有趣的项目。
+            如果您想了解更多详情，欢迎通过 GitHub 查看我的完整项目列表。
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#" class="btn btn-primary" onclick="openGitHub()">
+                <i data-lucide="github" class="w-5 h-5 mr-2"></i>
+                查看 GitHub
+            </a>
+            <a href="#contact" class="btn btn-secondary" onclick="navigateToContact()">
+                <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                联系我
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+// 项目筛选功能
+function initProjectFilter() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // 更新按钮状态
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // 筛选项目
+            const filter = btn.dataset.filter;
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease-in-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// 项目演示链接
+function openProjectDemo(projectId) {
+    const demos = {
+        'ecommerce': 'https://demo-ecommerce.example.com',
+        'taskapp': 'https://demo-taskapp.example.com',
+        'apigateway': 'https://demo-api.example.com',
+        'dashboard': 'https://demo-dashboard.example.com',
+        'social': 'https://demo-social.example.com',
+        'wallet': 'https://demo-wallet.example.com'
+    };
+    
+    if (demos[projectId]) {
+        window.open(demos[projectId], '_blank');
+    } else {
+        alert('演示链接暂时不可用');
+    }
+}
+
+// 项目代码链接
+function openProjectCode(projectId) {
+    const repos = {
+        'ecommerce': 'https://github.com/username/ecommerce-platform',
+        'taskapp': 'https://github.com/username/task-management-app',
+        'apigateway': 'https://github.com/username/api-gateway',
+        'dashboard': 'https://github.com/username/data-visualization',
+        'social': 'https://github.com/username/social-media-app',
+        'wallet': 'https://github.com/username/blockchain-wallet'
+    };
+    
+    if (repos[projectId]) {
+        window.open(repos[projectId], '_blank');
+    } else {
+        alert('代码仓库暂时不可用');
+    }
+}
+
+// 打开 GitHub
+function openGitHub() {
+    window.open('https://github.com/username', '_blank');
+}
+
+// 导航到联系页面
+function navigateToContact() {
+    if (window.portfolioSite) {
+        window.portfolioSite.loadContent('contact');
+    }
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+    initProjectFilter();
+    
+    // 重新初始化图标
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+});
+
+// 如果页面已经加载完成，立即初始化
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProjectFilter);
+} else {
+    initProjectFilter();
+}
+
+// 重新初始化图标
+if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+}
+</script>

@@ -1,0 +1,98 @@
+<!-- 轮播图组件 -->
+<div id="carousel-container" class="carousel-container mb-12">
+    <div class="carousel-wrapper">
+        <div class="carousel-slides" id="carousel-slides">
+            <!-- 轮播图片将通过 JavaScript 动态生成 -->
+        </div>
+        
+        <!-- 左右箭头 -->
+        <button class="carousel-arrow carousel-prev" id="carousel-prev" aria-label="上一张">
+            <i data-lucide="chevron-left"></i>
+        </button>
+        <button class="carousel-arrow carousel-next" id="carousel-next" aria-label="下一张">
+            <i data-lucide="chevron-right"></i>
+        </button>
+        
+        <!-- 指示点 -->
+        <div class="carousel-dots" id="carousel-dots">
+            <!-- 指示点将通过 JavaScript 动态生成 -->
+        </div>
+    </div>
+</div>
+
+<div class="text-center py-12">
+    <div class="max-w-4xl mx-auto">
+        <h1 id="welcome-title" class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            欢迎来到我的
+            <span id="welcome-highlight" class="text-blue-600">个人作品集</span>
+        </h1>
+        
+        <p id="welcome-description" class="text-xl text-gray-600 mb-8 leading-relaxed">
+            我是一名充满热情的开发者，专注于创建优雅、高效的数字解决方案。
+            <br>
+            在这里，您可以了解我的技能、查看我的项目作品，并与我取得联系。
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <button class="btn btn-primary" onclick="portfolioSite.loadContent('pages/about.md', 'markdown')">
+                了解更多关于我
+            </button>
+            <button class="btn btn-secondary" onclick="portfolioSite.loadContent('pages/projects/web.html', 'html')">
+                查看我的作品
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="skills-grid" class="grid md:grid-cols-3 gap-8 mb-12">
+    <div class="card text-center">
+        <div class="text-blue-600 mb-4">
+            <i data-lucide="code" class="w-12 h-12 mx-auto"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">前端开发</h3>
+        <p class="text-gray-600">
+            精通现代前端技术栈，包括 HTML5、CSS3、JavaScript、React、Vue.js 等，
+            致力于创建响应式和用户友好的界面。
+        </p>
+    </div>
+    
+    <div class="card text-center">
+        <div class="text-blue-600 mb-4">
+            <i data-lucide="server" class="w-12 h-12 mx-auto"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">后端开发</h3>
+        <p class="text-gray-600">
+            熟悉服务器端开发，包括 Node.js、Python、数据库设计等，
+            能够构建稳定可靠的后端服务和 API。
+        </p>
+    </div>
+    
+    <div class="card text-center">
+        <div class="text-blue-600 mb-4">
+            <i data-lucide="smartphone" class="w-12 h-12 mx-auto"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">移动开发</h3>
+        <p class="text-gray-600">
+            具备移动应用开发经验，包括 React Native、Flutter 等跨平台技术，
+            为用户提供优质的移动端体验。
+        </p>
+    </div>
+</div>
+
+<div class="bg-gray-50 rounded-lg p-8 text-center">
+    <h2 id="vision-title" class="text-2xl font-bold text-gray-900 mb-4">让我们一起创造精彩</h2>
+    <p id="vision-description" class="text-gray-600 mb-6">
+        如果您有任何项目想法或合作机会，我很乐意与您交流。
+        让我们一起将创意转化为现实！
+    </p>
+    <button class="btn btn-primary" onclick="portfolioSite.loadContent('pages/contact.html', 'html')">
+        联系我
+    </button>
+</div>
+
+<script>
+// 重新初始化图标
+if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+}
+</script>
