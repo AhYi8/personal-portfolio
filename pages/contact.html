@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto">
     <div class="text-center mb-12">
         <h1 class="text-3xl font-bold text-gray-900 mb-4">联系我</h1>
-        <p class="text-xl text-gray-600">
+        <p id="contact-description" class="text-xl text-gray-600">
             我很乐意听到您的想法！无论是项目合作、技术交流还是简单的问候，
             都欢迎通过以下方式与我联系。
         </p>
@@ -12,7 +12,7 @@
         <div>
             <h2 class="text-2xl font-semibold text-gray-900 mb-6">联系信息</h2>
             
-            <div class="space-y-6">
+            <div id="contact-info-container" class="space-y-6">
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
                         <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -56,7 +56,7 @@
             <!-- 社交媒体链接 -->
             <div class="mt-8">
                 <h3 class="text-lg font-medium text-gray-900 mb-4">社交媒体</h3>
-                <div class="flex space-x-4">
+                <div id="social-media-container" class="flex space-x-4">
                     <a href="https://github.com/zhangsan" target="_blank" 
                        class="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors duration-200">
                         <i data-lucide="github" class="w-5 h-5"></i>
@@ -124,9 +124,9 @@
     
     <!-- 常见问题 -->
     <div class="mt-16">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-8 text-center">常见问题</h2>
+        <h2 id="faq-title" class="text-2xl font-semibold text-gray-900 mb-8 text-center">常见问题</h2>
         
-        <div class="grid md:grid-cols-2 gap-8">
+        <div id="faq-container" class="grid md:grid-cols-2 gap-8">
             <div class="card">
                 <h3 class="text-lg font-medium text-gray-900 mb-3">
                     <i data-lucide="clock" class="w-5 h-5 inline mr-2 text-blue-600"></i>
@@ -173,43 +173,3 @@
         </div>
     </div>
 </div>
-
-<script>
-// 联系表单处理
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const messageDiv = document.getElementById('form-message');
-    
-    // 模拟表单提交（实际项目中需要连接到后端服务）
-    messageDiv.innerHTML = `
-        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-            <div class="flex items-center">
-                <i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-2"></i>
-                <span class="text-green-800 font-medium">消息发送成功！</span>
-            </div>
-            <p class="text-green-700 mt-2">感谢您的消息，我会尽快回复您。</p>
-        </div>
-    `;
-    messageDiv.classList.remove('hidden');
-    
-    // 清空表单
-    this.reset();
-    
-    // 重新初始化图标
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-    
-    // 3秒后隐藏消息
-    setTimeout(() => {
-        messageDiv.classList.add('hidden');
-    }, 3000);
-});
-
-// 重新初始化图标
-if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
-}
-</script>

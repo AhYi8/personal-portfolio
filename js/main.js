@@ -364,11 +364,11 @@ class PortfolioSite {
             }
             
             const content = await response.text();
-            
-            // 根据类型渲染内容
-            this.renderContent(container, content, type);
-            
+
             this.currentRoute = route;
+
+            // 根据类型渲染内容
+            this.renderContent(container, content, type, route);
             
         } catch (error) {
             console.error('加载内容失败:', error);
@@ -397,7 +397,7 @@ class PortfolioSite {
      * @param {string} content - 内容
      * @param {string} type - 内容类型
      */
-    renderContent(container, content, type) {
+    renderContent(container, content, type, route) {
         // 保存原始的className，确保不丢失基础样式
         const originalClasses = 'bg-white rounded-lg shadow-sm p-6';
         
@@ -429,9 +429,15 @@ class PortfolioSite {
         if (carouselContainer && this.config.carousel && this.config.carousel.enabled) {
             this.initCarousel();
         }
-        
-        // 检查是否需要加载首页动态内容
-        this.loadHomepageContent();
+
+        // 根据路由加载特定页面的动态内容
+        if (route) {
+            if (route.includes('home.html')) {
+                this.loadHomepageContent();
+            } else if (route.includes('contact.html')) {
+                this.loadContactContent();
+            }
+        }
     }
     
     /**
@@ -483,10 +489,22 @@ class PortfolioSite {
     }
     
     // 加载默认内容
-    loadDefaultContent() {
+    async loadDefaultContent() {
         const firstNavItem = this.config.navigation[0];
         if (firstNavItem && firstNavItem.route) {
-            this.loadContent(firstNavItem.route, firstNavItem.type);
+            this.currentRoute = firstNavItem.route;
+            try {
+                const response = await fetch(firstNavItem.route);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const content = await response.text();
+                 const container = document.getElementById('content-container');
+                 this.renderContent(container, content, firstNavItem.type, firstNavItem.route);
+            } catch (error) {
+                console.error('加载默认内容失败:', error);
+                this.showError('无法加载默认内容。');
+            }
         }
     }
     
@@ -813,6 +831,160 @@ class PortfolioSite {
             descriptionElement.textContent = visionConfig.description;
         }
     }
+
+    /**
+     * 加载联系页面内容
+     */
+    loadContactContent() {
+        if (!this.config.contact) return;
+
+        const contactConfig = this.config.contact;
+
+        // 加载描述信息
+        this.setElement('contact-description', contactConfig.description);
+
+        // 加载联系信息
+        this.loadContactInfo(contactConfig.info);
+
+        // 加载社交媒体链接
+        this.loadSocialMedia(contactConfig.social);
+
+        // 加载常见问题
+        this.loadFaq(contactConfig.faq);
+
+        // 绑定表单提交事件
+        this.bindContactForm(contactConfig.emailSettings);
+        
+        this.initializeIcons();
+    }
+
+    /**
+     * 加载联系信息
+     */
+    loadContactInfo(info) {
+        const container = document.getElementById('contact-info-container');
+        if (!container || !info) return;
+
+        container.innerHTML = info.map(item => `
+            <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <i data-lucide="${item.icon}" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900">${item.label}</h3>
+                    <p class="text-gray-600">${item.value}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    /**
+     * 加载社交媒体链接
+     */
+    loadSocialMedia(social) {
+        const container = document.getElementById('social-media-container');
+        if (!container || !social) return;
+
+        container.innerHTML = social.map(item => `
+            <a href="${item.url}" target="_blank" 
+               class="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors duration-200">
+                <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+            </a>
+        `).join('');
+    }
+
+    /**
+     * 加载常见问题
+     */
+    loadFaq(faq) {
+        const titleElement = document.getElementById('faq-title');
+        const container = document.getElementById('faq-container');
+        if (!container || !faq) return;
+
+        if (titleElement) {
+            titleElement.textContent = faq.title;
+        }
+
+        container.innerHTML = faq.items.map(item => `
+            <div class="card">
+                <h3 class="text-lg font-medium text-gray-900 mb-3">
+                    <i data-lucide="${item.icon}" class="w-5 h-5 inline mr-2 text-blue-600"></i>
+                    ${item.question}
+                </h3>
+                <p class="text-gray-600">${item.answer}</p>
+            </div>
+        `).join('');
+    }
+
+    /**
+     * 绑定联系表单提交事件
+     */
+    bindContactForm(emailSettings) {
+        const form = document.getElementById('contact-form');
+        if (!form || !emailSettings || !emailSettings.enabled) return;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const messageDiv = document.getElementById('form-message');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+
+            const setButtonLoading = (loading) => {
+                if (loading) {
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = `
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        发送中...
+                    `;
+                } else {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                }
+            };
+
+            setButtonLoading(true);
+
+            emailjs.sendForm(emailSettings.serviceID, emailSettings.templateID, form, emailSettings.publicKey)
+                .then(() => {
+                    console.log('邮件发送成功!');
+                    messageDiv.innerHTML = `
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                            <div class="flex items-center">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-2"></i>
+                                <span class="text-green-800 font-medium">消息发送成功！</span>
+                            </div>
+                            <p class="text-green-700 mt-2">感谢您的消息，我们会尽快与您联系。</p>
+                        </div>
+                    `;
+                    form.reset();
+                })
+                .catch((error) => {
+                    console.error('邮件发送过程中发生错误:', error);
+                    messageDiv.innerHTML = `
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                            <div class="flex items-center">
+                                <i data-lucide="alert-circle" class="w-5 h-5 text-red-600 mr-2"></i>
+                                <span class="text-red-800 font-medium">消息发送失败！</span>
+                            </div>
+                            <p class="text-red-700 mt-2">抱歉，邮件发送失败，请检查您的EmailJS配置或稍后重试。</p>
+                        </div>
+                    `;
+                })
+                .finally(() => {
+                    setButtonLoading(false);
+                    messageDiv.classList.remove('hidden');
+                    this.initializeIcons();
+                });
+        });
+    }
+
+
 
     // 加载 Footer 内容
     loadFooterContent(footerConfig) {

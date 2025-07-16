@@ -114,7 +114,7 @@ const siteConfig = {
         skills: [
             {
                 icon: 'code',
-                title: '前端开发哈哈',
+                title: '前端开发',
                 description: '精通现代前端技术栈，包括 HTML5、CSS3、JavaScript、React、Vue.js 等，致力于创建响应式和用户友好的界面。'
             },
             {
@@ -305,6 +305,7 @@ const siteConfig = {
         images: {
             maxWidth: '100%',
             height: 'auto',
+            margin: '0 auto',
             borderRadius: '12px',
             marginBottom: '1rem',
             boxShadow: '0 4px 16px -2px rgba(0, 0, 0, 0.1)',
@@ -321,6 +322,85 @@ const siteConfig = {
             background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent)',
             margin: '2rem 0',
             borderRadius: '1px'
+        }
+    },
+
+    // 联系我页面配置
+    contact: {
+        // 描述信息
+        description: "我很（不）高兴能与您交流。无论您有项目想法、合作机会，还是只想打个招呼，都欢迎随时联系我。",
+        
+        // 联系信息
+        info: [
+            {
+                icon: 'mail',
+                label: '邮箱',
+                value: 'your-email@example.com'
+            },
+            {
+                icon: 'phone',
+                label: '电话',
+                value: '+1 (234) 567-890'
+            },
+            {
+                icon: 'map-pin',
+                label: '位置',
+                value: '地球，某个角落'
+            }
+        ],
+        
+        // 社交媒体
+        social: [
+            {
+                icon: 'github',
+                url: 'https://github.com/your-username'
+            },
+            {
+                icon: 'linkedin',
+                url: 'https://linkedin.com/in/your-profile'
+            },
+            {
+                icon: 'twitter',
+                url: 'https://twitter.com/your-handle'
+            }
+        ],
+        
+        // 邮件发送配置 (EmailJS)
+        // 注意：在前端暴露这些信息是不安全的，这里仅为演示目的
+        // 在实际应用中，应通过后端服务处理邮件发送
+        emailSettings: {
+            enabled: true, // 是否启用邮件发送功能
+            // EmailJS 配置
+            serviceID: '*****', // 替换为您的 EmailJS Service ID
+            templateID: '****', // 用于发送给您的邮件模板ID
+            publicKey: '*****' // 替换为您的 EmailJS Public Key (User ID)
+        },
+        
+        // 常见问题 (FAQ)
+        faq: {
+            title: "常见问题",
+            items: [
+                {
+                    icon: 'help-circle',
+                    question: "您接受哪些类型的项目？",
+                    answer: "我专注于 Web 开发项目，尤其是使用现代 JavaScript 框架（如 React、Vue）构建的单页应用和响应式网站。我也对后端开发和移动应用开发感兴趣。"
+                },
+                {
+                    icon: 'clock',
+                    question: "您的工作时间是怎样的？",
+                    answer: "我通常在工作日的上午9点到下午6点工作。不过，作为一名灵活的开发者，我可以根据项目需求调整工作时间。"
+                },
+                {
+                    icon: 'dollar-sign',
+                    question: "您的收费标准是什么？",
+                    answer: "我的收费根据项目的复杂性、范围和所需时间而定。我提供按小时计费和按项目计费两种模式。欢迎与我联系，获取详细报价。"
+                },
+                {
+                    icon: 'briefcase',
+                    question: "您是否接受远程工作？",
+                    answer: "是的，我完全支持远程工作，并拥有丰富的远程协作经验。我相信地理位置不应成为创造卓越产品的障碍。"
+                }
+            ]
         }
     },
 
