@@ -16,6 +16,7 @@ class PortfolioSite {
      */
     init() {
         try {
+            this.showLoading();
             this.loadSiteConfig();
             this.generateNavigation();
             this.bindEvents();
@@ -25,6 +26,7 @@ class PortfolioSite {
         } catch (error) {
             console.error('网站初始化失败:', error);
             this.showError('网站初始化失败，请刷新页面重试。');
+            this.hideLoading();
         }
     }
     
@@ -487,6 +489,28 @@ class PortfolioSite {
             alert(message);
         }
     }
+
+    showLoading() {
+        const loadingAnimation = document.getElementById('loading-animation');
+        const contentContainer = document.getElementById('content-container');
+        if (loadingAnimation) {
+            loadingAnimation.style.display = 'flex';
+        }
+        if (contentContainer) {
+            contentContainer.style.display = 'none';
+        }
+    }
+
+    hideLoading() {
+        const loadingAnimation = document.getElementById('loading-animation');
+        const contentContainer = document.getElementById('content-container');
+        if (loadingAnimation) {
+            loadingAnimation.style.display = 'none';
+        }
+        if (contentContainer) {
+            contentContainer.style.display = 'block';
+        }
+    }
     
     // 加载默认内容
     async loadDefaultContent() {
@@ -506,6 +530,7 @@ class PortfolioSite {
                 this.showError('无法加载默认内容。');
             }
         }
+        this.hideLoading();
     }
     
     /**
