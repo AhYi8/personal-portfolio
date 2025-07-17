@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们已收到您的消息</title>
+    <style>
+        /* --- 全局重置 --- */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f4f7f6; }
+
+        /* --- 响应式样式 --- */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                margin: auto !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0 !important; padding: 0 !important; background-color: #f4f7f6;">
+    <!-- 主容器 -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="background-color: #f4f7f6;">
+                <!--[if (gte mso 9)|(IE)]>
+                <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                <tr>
+                <td align="center" valign="top" width="600">
+                <![endif]-->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" class="email-container">
+                    <!-- 头部 -->
+                    <tr>
+                        <td align="center" style="padding: 40px 0; background-color: #ffffff; border-bottom: 1px solid #e0e0e0;">
+                            <h1 style="margin: 0; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; color: #333333;">
+                                感谢您的联系！
+                            </h1>
+                        </td>
+                    </tr>
+                    <!-- 内容区域 -->
+                    <tr>
+                        <td style="padding: 30px 20px; background-color: #ffffff;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td style="padding-bottom: 20px; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #555555;">
+                                        尊敬的 <strong>{{name}}</strong>,
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-bottom: 20px; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #555555;">
+                                        您好！我们已经收到了您发送的消息，非常感谢您的关注。我们会尽快处理您的请求，并通常会在 24-48 个工作小时内给您回复。
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-bottom: 20px; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #555555;">
+                                        祝您有美好的一天！
+                                    </td>
+                                </tr>
+                                <!-- 消息回顾 -->
+                                <tr>
+                                    <td style="padding-top: 20px; border-top: 1px solid #eeeeee;">
+                                        <h3 style="margin: 0 0 15px 0; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; color: #333333;">您的消息摘要：</h3>
+                                        <table border="0" cellpadding="10" cellspacing="0" width="100%" style="border: 1px solid #dddddd; border-radius: 8px;">
+                                             <tr>
+                                                <td width="80" style="font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #333333; background-color: #f9f9f9;">主题:</td>
+                                                <td style="font-family: Arial, sans-serif; font-size: 14px; color: #555555;">{{subject}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="80" valign="top" style="font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #333333; background-color: #f9f9f9;">内容:</td>
+                                                <td style="font-family: Arial, sans-serif; font-size: 14px; color: #555555; line-height: 22px; white-space: pre-wrap; word-wrap: break-word;">
+                                                    {{message}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- 页脚 -->
+                    <tr>
+                        <td align="center" style="padding: 20px; background-color: #ffffff; border-top: 1px solid #e0e0e0;">
+                            <p style="margin: 0; font-family: Arial, sans-serif; font-size: 12px; color: #999999;">
+                                这是一封自动回复邮件，请勿直接回复。
+                            </p>
+                            <p style="margin: 10px 0 0 0; font-family: Arial, sans-serif; font-size: 12px; color: #999999;">
+                                <!-- 在这里可以替换成您的公司名称和网站链接 -->
+                                <strong>21zys.com</strong> | <a href="https://21zys.com" style="color: #007bff; text-decoration: none;">访问我们的网站</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

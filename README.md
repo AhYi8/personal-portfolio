@@ -31,6 +31,9 @@ personal-portfolio/
 │   ├── projects.html   # 项目页面的 HTML 内容
 │   ├── skills.html     # 技能页面的 HTML 内容
 │   └── contact.html    # 联系页面的 HTML 内容
+├── template/
+│   ├── contact_us_email.html   # 用户“发送消息”的邮件通知模板
+│   └── auto_replay.html        # 自动回复用户的邮件通知模板
 ├── index.html          # 应用程序的主入口点
 ├── README.md           # 英文版说明文件
 ├── README.zh-CN.md     # 本文件
@@ -69,6 +72,34 @@ personal-portfolio/
         publicKey: 'YOUR_PUBLIC_KEY'
     };
     ```
+
+### Email 通知模板
+
+该项目包含两个 Email 通知模板：
+
+-   `template/contact_us_email.html`：用户发送消息时的通知模板。
+-   `template/auto_replay.html`：自动回复用户消息的通知模板。
+
+您可以根据需要自定义这些模板，以匹配您的品牌和通信风格。
+
+**在EmailJS中配置模版**
+
+1. 创建新的邮件模板
+
+![创建新的邮件模板](./assets/markdown/CreateNewTemplate_1.png)
+
+2. 随便选择一个模板，点击创建
+
+![创建模板](./assets/markdown/CreateNewTemplate_2.png)
+
+3. 创建`Auto Replay`模板
+
+![Auto Replay](./assets/markdown/CreateNewTemplate_3.png)
+
+4. 根据上面的步骤再创建一个`Contact Us`模板，并在 `Auto Replay` 中选择之前创建的 `Auto Replay` 模板
+
+![Contact Us](./assets/markdown/CreateNewTemplate_4.png)
+![Contact Us](./assets/markdown/CreateNewTemplate_5.png)
 
 ## 部署
 

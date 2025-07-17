@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新的联系表单提交</title>
+    <style>
+        /* --- 全局重置 --- */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f4f7f6; }
+
+        /* --- 响应式样式 --- */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                margin: auto !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0 !important; padding: 0 !important; background-color: #f4f7f6;">
+    <!-- 主容器 -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="background-color: #f4f7f6;">
+                <!--[if (gte mso 9)|(IE)]>
+                <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                <tr>
+                <td align="center" valign="top" width="600">
+                <![endif]-->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" class="email-container">
+                    <!-- 头部 -->
+                    <tr>
+                        <td align="center" style="padding: 40px 0; background-color: #ffffff; border-bottom: 1px solid #e0e0e0;">
+                            <h1 style="margin: 0; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; color: #333333;">
+                                您有新的消息
+                            </h1>
+                        </td>
+                    </tr>
+                    <!-- 内容区域 -->
+                    <tr>
+                        <td style="padding: 30px 20px; background-color: #ffffff;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td style="padding-bottom: 20px; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #555555;">
+                                        您通过网站的联系表单收到了一条新消息。
+                                    </td>
+                                </tr>
+                                <!-- 提交详情 -->
+                                <tr>
+                                    <td>
+                                        <table border="0" cellpadding="10" cellspacing="0" width="100%" style="border: 1px solid #dddddd; border-radius: 8px;">
+                                            <tr>
+                                                <td width="100" style="font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #333333; background-color: #f9f9f9;">发件人:</td>
+                                                <td style="font-family: Arial, sans-serif; font-size: 14px; color: #555555;">{{name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="100" style="font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #333333; background-color: #f9f9f9;">邮箱:</td>
+                                                <td style="font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
+                                                    <a href="mailto:{{email}}" style="color: #007bff; text-decoration: none;">{{email}}</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="100" style="font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #333333; background-color: #f9f9f9;">主题:</td>
+                                                <td style="font-family: Arial, sans-serif; font-size: 14px; color: #555555;">{{subject}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="100" valign="top" style="font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #333333; background-color: #f9f9f9;">消息内容:</td>
+                                                <td style="font-family: Arial, sans-serif; font-size: 14px; color: #555555; line-height: 22px; white-space: pre-wrap; word-wrap: break-word;">
+                                                    {{message}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- 页脚 -->
+                    <tr>
+                        <td align="center" style="padding: 20px; background-color: #ffffff; border-top: 1px solid #e0e0e0;">
+                            <p style="margin: 0; font-family: Arial, sans-serif; font-size: 12px; color: #999999;">
+                                此邮件由您的网站联系表单自动发送。
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
