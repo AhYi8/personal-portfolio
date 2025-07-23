@@ -104,7 +104,7 @@ body {
     max-height: calc(100vh - 80px); /* 限制最大高度，防止超出屏幕 */
     overflow-y: auto; /* 内容过多时可滚动 */
     background-color: var(--bg-primary);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 #mobile-nav.show {
