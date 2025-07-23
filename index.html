@@ -24,28 +24,19 @@
     <header class="header-glass sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="header-content flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <h1 class="logo text-2xl" id="site-logo">个人作品集</h1>
+                <!-- Header Left Components -->
+                <div id="header-left" class="flex items-center">
+                    <!-- 左侧组件将通过 JavaScript 动态加载 -->
                 </div>
-                
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-2">
-                    <div id="desktop-nav" class="flex space-x-2">
-                        <!-- 导航菜单将通过 JavaScript 动态生成 -->
-                    </div>
-                </nav>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button type="button" class="nav-item text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" id="mobile-menu-btn">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
-                    </button>
+
+                <!-- Header Right Components -->
+                <div id="header-right" class="flex items-center">
+                    <!-- 右侧组件将通过 JavaScript 动态加载 -->
                 </div>
             </div>
             
             <!-- Mobile Navigation -->
-            <div class="md:hidden hidden" id="mobile-menu">
+            <div class="md:hidden" id="mobile-menu">
                 <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3" id="mobile-nav">
                     <!-- 移动端菜单项将通过 JavaScript 动态生成 -->
                 </div>
@@ -99,7 +90,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- JavaScript 文件 -->
-    <script src="config/config.js"></script>
-    <script src="js/main.js"></script>
+    <script src="config/config.js?v=20250723"></script>
+    <script src="js/main.js?v=20250723"></script>
 </body>
 </html>

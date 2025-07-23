@@ -14,15 +14,16 @@ class PortfolioSite {
      * 初始化网站
      * 按顺序执行各项初始化任务
      */
-    init() {
+    async init() {
         try {
+            console.log('开始初始化网站...');
             this.showLoading();
             this.loadSiteConfig();
-            this.generateNavigation();
+            await this.loadHeaderComponents(); // 等待Header组件加载完成
             this.bindEvents();
             this.initCarousel();
-            this.loadDefaultContent();
             this.initializeIcons();
+            console.log('网站初始化完成');
         } catch (error) {
             console.error('网站初始化失败:', error);
             this.showError('网站初始化失败，请刷新页面重试。');
@@ -57,8 +58,7 @@ class PortfolioSite {
             this.setAttribute('page-keywords', 'content', site.keywords);
             document.title = site.title;
             
-            // 设置 Logo
-            this.setElement('site-logo', site.logo);
+            // Logo 和导航现在通过组件加载，这里不再需要单独设置
             
             // 加载 Footer 内容
             if (footer) {
@@ -95,10 +95,119 @@ class PortfolioSite {
     }
     
     /**
-     * 生成导航菜单
-     * 为桌面端和移动端生成导航HTML结构
+     * 加载 Header 区域的组件
      */
-    generateNavigation() {
+    async loadHeaderComponents() {
+        console.log('开始加载Header组件...');
+        if (!this.config.header) return;
+
+        const headerLeftContainer = document.getElementById('header-left');
+        const headerRightContainer = document.getElementById('header-right');
+
+        if (this.config.header.left) {
+            for (const component of this.config.header.left) {
+                await this.loadComponent(component.name, 'header', component.config, headerLeftContainer);
+            }
+        }
+
+        if (this.config.header.right) {
+            for (const component of this.config.header.right) {
+                await this.loadComponent(component.name, 'header', component.config, headerRightContainer);
+            }
+        }
+
+        // 组件加载后，重新绑定事件并初始化图标
+        this.bindNavEvents();
+        this.initializeIcons();
+        
+        console.log('Header组件加载完成，准备加载默认内容...');
+        
+        // 确保导航组件配置完全加载后再加载默认内容
+        // 使用Promise确保异步操作正确完成
+        return new Promise((resolve) => {
+            setTimeout(async () => {
+                console.log('开始执行loadDefaultContent...');
+                await this.loadDefaultContent();
+                resolve();
+            }, 300);
+        });
+    }
+
+    /**
+     * 通用组件加载器
+     * @param {string} name - 组件名称
+     * @param {string} type - 组件类型 (e.g., 'header', 'container', 'footer')
+     * @param {object} config - 组件的具体配置
+     * @param {HTMLElement} container - 渲染组件的容器元素
+     */
+    async loadComponent(name, type, config, container) {
+        try {
+            const componentPath = `components/${type}/${name}`;
+            const templateResponse = await fetch(`${componentPath}/template.html`);
+            if (!templateResponse.ok) throw new Error(`无法加载组件模板: ${name}`);
+            let template = await templateResponse.text();
+
+            // 动态加载组件的JS配置文件
+            await this.loadScript(`${componentPath}/config.js`);
+            const defaultConfig = window[`${name}Config`]?.default || {};
+            const finalConfig = { ...defaultConfig, ...config };
+
+            // 如果是导航组件，保存配置到全局变量
+            if (name === 'navigation') {
+                window.navigationConfig = window[`${name}Config`];
+                console.log('导航配置已保存到全局变量:', window.navigationConfig);
+            }
+
+            // 渲染模板
+            const renderedHtml = this.renderTemplate(template, finalConfig);
+            // 先清空容器，再添加新内容，防止重复
+            if (name === 'logo' || name === 'navigation') { // 仅对header组件特殊处理，后续可优化
+                container.innerHTML = ''; 
+            }
+            container.innerHTML += renderedHtml;
+
+            // 如果是导航组件，特殊处理
+            if (name === 'navigation') {
+                this.generateNavigation(finalConfig.items);
+            }
+
+        } catch (error) {
+            console.error(`加载组件 ${name} 失败:`, error);
+        }
+    }
+
+    /**
+     * 加载脚本文件
+     * @param {string} src - 脚本路径
+     * @returns {Promise<void>}
+     */
+    loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error(`无法加载脚本: ${src}`));
+            document.head.appendChild(script);
+        });
+    }
+
+    /**
+     * 简单的模板渲染函数
+     * @param {string} template - HTML模板字符串
+     * @param {object} data - 数据对象
+     * @returns {string}
+     */
+    renderTemplate(template, data) {
+        return template.replace(/{{(.*?)}}/g, (match, key) => {
+            return data[key.trim()] || '';
+        });
+    }
+
+    /**
+     * 生成导航菜单
+     * @param {Array} navItems - 导航项数组
+     */
+    generateNavigation(navItems) {
         const desktopNav = document.getElementById('desktop-nav');
         const mobileNav = document.getElementById('mobile-nav');
         
@@ -107,13 +216,13 @@ class PortfolioSite {
             return;
         }
         
-        if (!this.config.navigation || !Array.isArray(this.config.navigation)) {
-            console.error('导航配置缺失或格式错误');
+        if (!navItems || !Array.isArray(navItems)) {
+            console.error('导航项配置缺失或格式错误');
             return;
         }
         
         // 生成桌面端导航
-        const desktopNavHtml = this.config.navigation.map(item => {
+        const desktopNavHtml = navItems.map(item => {
             if (item.children && item.children.length > 0) {
                 // 有子菜单的情况
                 const childrenHtml = item.children.map(child => 
@@ -142,7 +251,7 @@ class PortfolioSite {
         desktopNav.innerHTML = desktopNavHtml;
         
         // 生成移动端导航
-        const mobileNavHtml = this.config.navigation.map(item => {
+        const mobileNavHtml = navItems.map(item => {
             if (item.children && item.children.length > 0) {
                 const childrenHtml = item.children.map(child => 
                     `<a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 rounded-lg" data-route="${child.route}" data-type="${child.type}">${child.name}</a>`
@@ -286,43 +395,51 @@ class PortfolioSite {
         return div;
     }
     
-    // 绑定事件
-    bindEvents() {
-        // 移动端菜单切换
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                this.toggleMobileMenu();
-            });
-        }
-        
-        // 导航菜单点击事件委托
-        document.addEventListener('click', (e) => {
-            const target = e.target.closest('[data-route]');
-            if (target) {
+    bindNavEvents() {
+        // 导航链接点击事件 (事件委托)
+        document.body.addEventListener('click', (e) => {
+            const navLink = e.target.closest('[data-route]');
+            if (navLink) {
                 e.preventDefault();
-                const route = target.getAttribute('data-route');
-                const type = target.getAttribute('data-type');
-                
-                if (route && type) {
-                    this.loadContent(route, type);
-                    this.setActiveNav(target);
-                    
-                    // 如果是移动端菜单，关闭菜单
-                    if (target.closest('#mobile-menu')) {
-                        this.toggleMobileMenu();
-                    }
+                if (this.isLoading) return;
+
+                const route = navLink.dataset.route;
+                const type = navLink.dataset.type;
+                this.loadContent(route, type);
+                this.setActiveNav(navLink);
+
+                // 如果是移动端，关闭菜单
+                const mobileNav = document.getElementById('mobile-nav');
+                if (mobileNav && mobileNav.classList.contains('show')) {
+                    mobileNav.classList.remove('show');
                 }
             }
         });
+
+        // 移动端菜单按钮点击事件
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        if (mobileMenuBtn && mobileNav) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                mobileNav.classList.toggle('show');
+            });
+        }
+
+        // 点击页面其他地方关闭移动端菜单
+        document.addEventListener('click', (e) => {
+            const mobileNav = document.getElementById('mobile-nav');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            if (mobileNav && mobileMenuBtn && 
+                !mobileNav.contains(e.target) && 
+                !mobileMenuBtn.contains(e.target)) {
+                mobileNav.classList.remove('show');
+            }
+        });
     }
-    
-    // 切换移动端菜单
-    toggleMobileMenu() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.classList.toggle('hidden');
-    }
+
+    bindEvents() {}
     
     // 设置活跃导航
     setActiveNav(activeLink) {
@@ -347,6 +464,8 @@ class PortfolioSite {
             return; // 防止重复加载
         }
         
+        console.log(`开始加载内容: ${route} (类型: ${type})`);
+        
         const container = document.getElementById('content-container');
         if (!container) {
             console.error('内容容器未找到');
@@ -359,13 +478,23 @@ class PortfolioSite {
             // 显示加载状态
             this.showLoadingState(container);
             
-            const response = await fetch(route);
+            // 构建正确的文件路径
+            let filePath = route;
+            if (type === 'html' && !route.includes('.html')) {
+                filePath = `pages/${route}.html`;
+            } else if (type === 'markdown' && !route.includes('.md')) {
+                filePath = `pages/${route}.md`;
+            }
+            
+            console.log(`请求文件路径: ${filePath}`);
+            const response = await fetch(filePath);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
             
             const content = await response.text();
+            console.log(`内容加载成功: ${route}`);
 
             this.currentRoute = route;
 
@@ -514,23 +643,29 @@ class PortfolioSite {
     
     // 加载默认内容
     async loadDefaultContent() {
-        const firstNavItem = this.config.navigation[0];
-        if (firstNavItem && firstNavItem.route) {
-            this.currentRoute = firstNavItem.route;
-            try {
-                const response = await fetch(firstNavItem.route);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+        try {
+            console.log('=== 开始加载默认内容 ===');
+            
+            // 直接尝试加载首页，不依赖导航配置
+            console.log('直接加载首页内容...');
+            await this.loadContent('pages/home.html', 'html');
+            
+            // 等待一段时间后尝试设置导航激活状态
+            setTimeout(() => {
+                const homeNavElement = document.querySelector('[data-route="pages/home.html"]');
+                if (homeNavElement) {
+                    console.log('设置首页导航为激活状态');
+                    this.setActiveNav(homeNavElement);
+                } else {
+                    console.log('未找到首页导航元素');
                 }
-                const content = await response.text();
-                 const container = document.getElementById('content-container');
-                 this.renderContent(container, content, firstNavItem.type, firstNavItem.route);
-            } catch (error) {
-                console.error('加载默认内容失败:', error);
-                this.showError('无法加载默认内容。');
-            }
+            }, 500);
+            
+        } catch (error) {
+            console.error('加载默认内容失败:', error);
+        } finally {
+            this.hideLoading();
         }
-        this.hideLoading();
     }
     
     /**
@@ -1203,16 +1338,7 @@ function toggleMobileSubmenu(button) {
 }
 
 // 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     window.portfolioSite = new PortfolioSite();
+    await window.portfolioSite.init();
 });
-
-// 如果DOM已经加载完成，直接初始化
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        window.portfolioSite = new PortfolioSite();
-    });
-} else {
-    // DOM已经加载完成
-    window.portfolioSite = new PortfolioSite();
-}

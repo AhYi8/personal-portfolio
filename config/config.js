@@ -4,73 +4,25 @@ const siteConfig = {
     site: {
         title: '个人作品集 - 张三',
         description: '这是一个展示个人技能和项目作品的专业作品集网站',
-        keywords: '个人作品集,前端开发,项目展示,技能展示',
-        logo: '张三的作品集'
+        keywords: '个人作品集,前端开发,项目展示,技能展示'
+    },
+
+    // Header区域配置
+    header: {
+        left: [
+            {
+                name: 'logo',
+            }
+        ],
+        right: [
+            {
+                name: 'navigation',
+            }
+        ]
     },
     
-    // 导航菜单配置
-    navigation: [
-        {
-            name: '首页',
-            route: 'pages/home.html',
-            type: 'html' // html 或 markdown
-        },
-        {
-            name: '关于我',
-            route: 'pages/about.md',
-            type: 'markdown'
-        },
-        {
-            name: '技能展示',
-            route: 'pages/skills.html',
-            type: 'html',
-            children: [
-                {
-                    name: '前端技能',
-                    route: 'pages/skills/frontend.md',
-                    type: 'markdown'
-                },
-                {
-                    name: '后端技能',
-                    route: 'pages/skills/backend.md',
-                    type: 'markdown'
-                },
-                {
-                    name: '工具使用',
-                    route: 'pages/skills/tools.md',
-                    type: 'markdown'
-                }
-            ]
-        },
-        {
-            name: '项目作品',
-            // 注意：这个一级菜单没有配置 route，所以点击时会跳转到第一个子菜单
-            route: 'pages/projects.html',
-            type: 'html',
-            // children: [
-            //     {
-            //         name: 'Web 项目',
-            //         route: 'pages/projects/web.html',
-            //         type: 'html'
-            //     },
-            //     {
-            //         name: '移动端项目',
-            //         route: 'pages/projects/mobile.md',
-            //         type: 'markdown'
-            //     },
-            //     {
-            //         name: '开源项目',
-            //         route: 'pages/projects/opensource.md',
-            //         type: 'markdown'
-            //     }
-            // ]
-        },
-        {
-            name: '联系我',
-            route: 'pages/contact.html',
-            type: 'html'
-        }
-    ],
+    // 旧的导航菜单配置已被新的 header.right.config.items 替代，此处内容已废弃
+    // navigation: [],
     
     // 轮播图配置
     carousel: {

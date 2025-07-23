@@ -96,6 +96,19 @@ body {
 
 #mobile-nav {
     gap: 2px;
+    position: absolute;
+    top: 100%;
+    right: -15px; /* 定位到右侧 */
+    transform: translateX(100%); /* 默认隐藏在屏幕右侧 */
+    transition: transform 0.3s ease-in-out;
+    max-height: calc(100vh - 80px); /* 限制最大高度，防止超出屏幕 */
+    overflow-y: auto; /* 内容过多时可滚动 */
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+}
+
+#mobile-nav.show {
+    transform: translateX(0); /* 显示时移动到屏幕内 */
 }
 
 /* 子菜单样式优化 */
